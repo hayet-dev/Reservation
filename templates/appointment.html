@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+
+{% block style %}
+    .card {
+    padding: 30px 40px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+        border: none !important;
+        box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2)
+    }
+
+    .blue-text {
+        color: #00BCD4
+    }
+
+    .form-control-label {
+        margin-bottom: 0
+    }
+
+    input,
+    textarea,
+    button {
+        padding: 8px 15px;
+        border-radius: 5px !important;
+        margin: 5px 0px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        font-size: 18px !important;
+        font-weight: 300
+    }
+
+    input:focus,
+    textarea:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        border: 1px solid #00BCD4;
+        outline-width: 0;
+        font-weight: 400
+    }
+
+    .btn-block {
+        text-transform: uppercase;
+        font-size: 15px !important;
+        font-weight: 400;
+        height: 43px;
+        cursor: pointer
+    }
+
+    .btn-block:hover {
+        color: #fff !important
+    }
+
+    button:focus {
+        -moz-box-shadow: none !important;
+        -webkit-box-shadow: none !important;
+        box-shadow: none !important;
+        outline-width: 0
+    }
+        /* CSS */
+    .highlight {
+        color: black; /* Couleur du texte en noir */
+        font-weight: bold; /* Texte en gras */
+    }
+
+    /* Pour le message SUCCESS en entier */
+    .messages .alert-success {
+        color: green; /* Couleur du texte en vert pour le message de succès */
+        /* Autres styles que vous souhaitez appliquer au message de succès */
+    }
+
+
+{% endblock style %}
+
+
+{% block content %}
+    {% if messages %}
+        <div class="card notification-card notification-invitation">
+            <div class="card-body">
+                {% for message in messages %}
+                    <div class="card-title">{{ message }}</div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="container-fluid px-1 py-5 mx-auto">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xl-7 col-lg-8 col-md-9 col-11 text-center">
+                <h3>
+                    Gestion des RDV
+                </h3>
+               
+                <p class="blue-text">Veuillez remplir le formulaire et nous enverrons votre rendez-vous dans les brefs délais </p>
+                <br>
+                <boutton type="button" class="btn btn-primary"><a href={%  url 'manage' %} class="highlight">Voir la liste  RDV </a></boutton>
+                <br>
+                <div class="card">
+                    <form class="form-card" method="POST" action="{% url 'appointment' %}">
+                        {% csrf_token %}
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Nom:<span class="text-danger"> *</span></label>
+                                <input required type="text" id="fname" name="nom" placeholder="Entrez votre nom..." onblur="validate(1)">
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Prénom:<span class="text-danger"> *</span></label>
+                                <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom..." onblur="validate(2)">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-between text-left">
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Email:<span class="text-danger"> *</span></label>
+                                <input type="text" id="email" name="email" placeholder="Entrez votre adresse email..." onblur="validate(3)">
+                            </div>
+
+                            <div class="form-group col-sm-6 flex-column d-flex">
+                                <label class="form-control-label px-3">Contact<span class="text-danger"> *</span></label>
+                                <input type="text" id="mob" name="contact" placeholder="Entrez votre numéro de contact..." onblur="validate(4)">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-start">
+                            <div class="form-group col-12 flex-column d-flex">
+                                <label class="form-control-label px-3">Votre demande<span class="text-danger"> *</span></label>
+                                <textarea id="info" name="message" placeholder="Votre message ne doit pas dépasser 300 caractères..." onblur="validate(6)"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="form-group col-sm-6">
+                                <button type="submit" class="btn-block btn-primary">Envoyer</button>
+                                
+                            </div>
+                            
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block script %}
+
+function validate(val) {
+    v1 = document.getElementById("fname");
+    v2 = document.getElementById("lname");
+    v3 = document.getElementById("email");
+    v4 = document.getElementById("mob");
+    v5 = document.getElementById("job");
+    v6 = document.getElementById("ans");
+
+    flag1 = true;
+    flag2 = true;https://scikit-learn.org/stable/tutorial/machine_learning_map/index.html
+    flag3 = true;
+    flag4 = true;
+    flag5 = true;
+    flag6 = true;
+
+    //... (validation logique)
+
+    flag = flag1 && flag2 && flag3 && flag4 && flag5 && flag6;
+
+    return flag;
+}
+{% endblock script %}
+
+
